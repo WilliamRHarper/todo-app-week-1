@@ -30,6 +30,14 @@ class TodoApp extends Component {
         })
         console.log(this.state.text);
     }
+
+    handleDelete = (evt, todo) => {
+      const filteredTodos = this.state.todos.filter((t) => t !== todo);
+
+      this.setState({
+        todos: filteredTodos,
+      });
+    }
   
     render() {
       return (
@@ -38,7 +46,10 @@ class TodoApp extends Component {
           <button onClick={this.handleClick}>Click me</button>
           <ul>
             {this.state.todos.map((todo, index)  => (
-              <li key= {index}>{todo}</li>
+              <li key= {index}>
+                <span>{todo}</span>
+                <button onClick={(evt) => this.handleDelete(evt, todo)}>X</button>
+              </li>
             ))}
           </ul>
         </div>
